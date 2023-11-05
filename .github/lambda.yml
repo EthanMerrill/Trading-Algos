@@ -4,7 +4,7 @@ jobs:
 
   deploy_source:
     name: deploy lambda from source
-    runs-on: python 3.1.0
+    runs-on: python 3.1.0 
     steps:
       - name: checkout source code
         uses: actions/checkout@v3
