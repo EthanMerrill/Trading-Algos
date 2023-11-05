@@ -1,23 +1,31 @@
+# https://aws.amazon.com/blogs/security/use-iam-roles-to-connect-github-actions-to-actions-in-aws/
 name: deploy to lambda
 on: [push]
 jobs:
   deploy_source:
     name: deploy lambda from source
     runs-on: ubuntu-latest
+    
     env:
       AWS_DEFAULT_REGION: us-east-1
+    
+    permissions:
+      id-token: write # This is required for requesting the JWT
+      contents: read  # This is required for actions/checkout
 
     steps:
       - name: checkout source code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::580446771729:user/GithubDeployUser
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          #aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          #aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
+          role-to-assume: arn:aws:iam::580446771729:oidc-provider/token.actions.githubusercontent.com
+          role-session-name: samplerolesession
+          
 
       - name: default deploy
         uses: appleboy/lambda-action@master
