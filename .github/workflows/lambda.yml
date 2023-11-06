@@ -23,6 +23,9 @@ jobs:
           aws-region: us-east-1
           role-to-assume: arn:aws:iam::580446771729:role/TradingAlgo-Deploy
           role-session-name: samplerolesession
+          audience: sts.amazonaws.com
+        env:
+          AWS_REGION:us-east-1
           
 
       - name: default deploy
