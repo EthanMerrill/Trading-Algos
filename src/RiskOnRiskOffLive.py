@@ -1,5 +1,5 @@
-!pip install alpaca_trade_api
-!pip install alpaca-py
+#!pip install alpaca_trade_api
+#!pip install alpaca-py
 
 import pandas_datareader.data as web
 import pandas as pd
