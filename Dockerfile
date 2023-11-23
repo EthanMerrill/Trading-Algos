@@ -1,6 +1,6 @@
 # 1. Base image
-FROM python:3.8.5-slim-buster
+FROM python:3.12.0-slim-bookworm
 # 2. Copy files
-COPY . /src
+COPY src /src
 # 3. Install dependencies
-RUN pip install -r /src/requirements.txt
+RUN pip3 install -r /src/requirements.txt
